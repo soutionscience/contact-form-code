@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My contact form</title>
+</head>
+<body ng-app="contactform">
+
+<div ng-controller="contactCtrl as ctrl" >
+
+	<h1>Contact us</h1>
+	<form name="myForm" novalidate>
+		<span><p>Name: 
+			<input type="text" name="firstname" placeholder="first-name"
+			ng-model="ctrl.user.firstname"
+			required
+			minlength="4">
+
+			 <img ng-hide="myForm.firstname.$invalid" height="15px" width="15px" src="images/tick.png">
+		
+		<input type="text" name="secondName" placeholder="second-name"
+		ng-model ="ctrl.user.secondName"
+		required
+		minlength="4">
+	   <img ng-hide="myForm.secondName.$invalid" height="15px" width="15px" src="images/tick.png">
+		
+		</p></span>
+     <span>
+		<div ng-if="(myForm.firstname.$error.required || myForm.firstname.$error.minlength) && myForm.firstname.$touched">
+				<p>First name must be atleast 4 charactes long</p>
+				
+			</div>
+			<div ng-if="(myForm.secondName.$error.required || myForm.secondName.$error.minlength) && myForm.secondName.$touched">
+				<p>Second name must be atleast 4 charactes</p>
+				
+			</div>
+		</span>
+
+
+		<span><p>
+			Email:
+			<input type="email" name="email"
+			ng-model="ctrl.user.email"
+			required
+			>{{ctrl.user.email}}
+			<div ng-if="myForm.email.$invalid && myForm.email.$touched">
+				<p>Please enter a valid email</p>
+			</div>
+		</p></span>
+
+		<span><p>Message:
+			<input type="textarea" name="message"
+			style="width:200px; height:50px;" 
+			ng-model="ctrl.user.message"
+			required
+			minlength="4">{{ctrl.user.message}}</input></p></span>
+			<div ng-if="(myForm.message.$error.minlength|| myForm.message.$error.required) $$ myForm.message.$touched ">
+				<p>Message must be atleast 4 chatactes long</p>
+			</div>
+			 <button
+          ng-disabled="myForm.$invalid"
+          ng-click="reg.submit()">Submit</button>
+	</form>
+	
+</div>
+
+
+
+<script src="lib/angular.min.js"></script>
+
+<!-- modules -->
+
+<script type="text/javascript" src="src/app.js"></script>
+<script type="text/javascript" src="src/contactForm.controller.js"></script>
+
+
+<!-- controllers -->
+</body>
+</html>
